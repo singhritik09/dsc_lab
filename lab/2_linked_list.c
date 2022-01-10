@@ -64,20 +64,24 @@ void display()
 void insert()
 {
     struct node *temp=head;
-    struct node *temp2;
+    struct node *newnode;
     int val;
-    int small=head->data;
-    printf("\nEnter data for insertion:");
+    printf("\nEnter value for insertion in sorted order: ");
     scanf("%d",&val);
-    if(head==NULL)
+    newnode->data=val;
+
+    int key=val;
+    if(head==NULL || key<head->data)
     {
-        insertAtHead();
+        newnode->next=head;
+        head=newnode;
     }
-    while(val>temp->nexte->data && temp->next!=NULL)
-    {
-        temp->next->data=val;
-        temp=temp->next;
-    }
+    while(temp->next->data<key && temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+    newnode->next=temp->next;
+    temp->next=newnode;
 }
 
 int main()
