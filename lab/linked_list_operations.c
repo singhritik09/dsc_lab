@@ -102,6 +102,46 @@ int deleteTail()
     return head;
 }
 
+
+void reverseLL()
+{
+    struct node *prevptr=NULL;
+    struct node *currptr=head;
+    struct node *nextptr;
+
+    while(currptr!=NULL)
+    {
+        nextptr=currptr->next;
+        currptr->next=prevptr;
+
+        prevptr=currptr;
+        currptr=nextptr;
+    }
+    head=prevptr;
+}
+
+void insertAtIndex()
+{
+    int val;
+    int index;
+    int i=0;
+    struct node *newnode=(struct node *)malloc(sizeof(struct node));
+    printf("\nEnter index:");
+    scanf("%d",&index);
+    printf("\nEnter Value: ");
+    scanf("%d",&val);
+
+    struct node *temp=head;
+    while(i!=index-1)
+    {
+        temp=temp->next;
+        i++;
+    }
+    newnode->data=val;
+    newnode->next=temp->next;
+    temp->next=newnode;
+}
+
 int main()
 {
     int choice;
@@ -115,6 +155,8 @@ int main()
         printf("\nDelete node at head:4");
         printf("\nDelete node at tail:5");
         printf("\nEnter 6 to display linked list:");
+        printf("\nEnter 7 to reverse linked list:");
+
         printf("\nEnter your choice:");
         scanf("%d",&choice);
         switch(choice)
@@ -137,6 +179,12 @@ int main()
             break;
         case 6:
             display();
+            break;
+        case 7:
+            reverseLL();
+            break;
+        case 8:
+            insertAtIndex();
             break;
         default:
             printf("\n************Wrong  Choice**************");
