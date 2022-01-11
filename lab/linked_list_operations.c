@@ -102,6 +102,28 @@ int deleteTail()
     return head;
 }
 
+int deleteVal()
+{
+    struct node *temp=head;
+    struct node *temp2;
+    int val;
+    int key;
+    printf("\nEnter value for deletion");
+    scanf("%d",&val);
+    if(val==temp->data)
+    {
+        deleteHead();
+        return;
+    }
+    while(temp->next->data!=val)
+    {
+        temp=temp->next;
+    }
+    temp2=temp->next;
+    temp->next=temp->next->next;
+    free(temp2);
+    return head;
+}
 
 void reverseLL()
 {
@@ -156,6 +178,8 @@ int main()
         printf("\nDelete node at tail:5");
         printf("\nEnter 6 to display linked list:");
         printf("\nEnter 7 to reverse linked list:");
+        printf("\nEnter 8 to insert at index:");
+        printf("\nEnter 9 to delete a value from linked list:");
 
         printf("\nEnter your choice:");
         scanf("%d",&choice);
@@ -186,6 +210,11 @@ int main()
         case 8:
             insertAtIndex();
             break;
+        case 9:
+            deleteVal();
+            break;
+        case 10:
+            exit(1);
         default:
             printf("\n************Wrong  Choice**************");
         }
