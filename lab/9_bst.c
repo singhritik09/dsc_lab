@@ -14,7 +14,19 @@ struct node *createnode(int val)
     n->data=val;
     n->left=NULL;
     n->right=NULL;
+
+    return n;
 };
+
+void inorder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        inorder(root->left);
+        printf("%d ",root->data);
+        inorder(root->right);
+    }
+}
 
 struct node *inOrderpre(struct node *root)
 {
@@ -33,18 +45,18 @@ struct node *deleteNode(struct node *root,int val)
     {
         return NULL;
     }
-    if(root->left==NULL &&root->right==NULL)
+    if(root->left==NULL && root->right==NULL)
     {
         free(root);
         return NULL;
     }
     if(val<root->data)
     {
-        root->left=deleteNode(root->left,val);
+        deleteNode(root->left,val);
     }
     else if(val>root->data)
     {
-        root->right=deleteNode(root->right,val);
+        deleteNode(root->right,val);
     }
 
     else{
@@ -52,21 +64,13 @@ struct node *deleteNode(struct node *root,int val)
         root->data=ipre->data;
         root->left=deleteNode(root->left,ipre->data);
     }
+
     return root;
 };
 
-void inorder(struct node *root)
-{
-    if(root!=NULL)
-    {
-        inorder(root->left);
-        printf("%d ",root->data);
-        inorder(root->right);
-    }
-}
-
 struct node *insert(struct node *root,int val)
 {
+    struct node *n;
     if(root==NULL)
     {
         return createnode(val);
@@ -81,7 +85,6 @@ struct node *insert(struct node *root,int val)
     }
     return root;
 };
-
 int main()
 {
     struct node *p=createnode(5);
@@ -89,17 +92,20 @@ int main()
     struct node *p2=createnode(6);
     struct node *p3=createnode(1);
     struct node *p4=createnode(4);
+
     p->left=p1;
     p->right=p2;
     p1->left=p3;
     p1->right=p4;
-    inorder(p);
     printf("\n");
-    deleteNode(p,3);
-    insert(p,11);
-    insert(p,7);
-    insert(p,54);
     inorder(p);
-    return 0;
 
+    insert(p,11);
+    printf("\n");
+    inorder(p);
+    //deleteNode(p,3);
+    deleteNode(p,4);
+
+    printf("\n");
+    inorder(p);
 }

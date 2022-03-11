@@ -71,7 +71,7 @@ void insert()
     newnode->data=val;
 
     int key=val;
-    if(head==NULL || key<head->data)
+    if(head==NULL || head->data>=newnode->data)
     {
         newnode->next=head;
         head=newnode;

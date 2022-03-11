@@ -44,7 +44,10 @@ void enque()
     else{
         rear->next=newnode;
     }
+    newnode->data=val;
+    newnode->next=NULL;
     rear=newnode;
+
 }
 
 int deque()
@@ -120,7 +123,6 @@ int main()
         default:
             printf("\nWrong Choice");
         }
-
     }
     return 0;
 }

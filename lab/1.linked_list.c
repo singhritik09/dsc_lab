@@ -41,8 +41,8 @@ struct node * nodeList(int n)
 void deleteAtHead()
 {
     struct node *temp=head;
-    head=head->next;
     free(temp);
+    head=head->next;
 }
 
 void display()

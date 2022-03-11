@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 struct node
 {
@@ -10,13 +9,13 @@ struct node
 
 struct node *createnode(int val)
 {
-    struct node *n=(struct node *)malloc(sizeof(struct node));
-    n->data=val;
-    n->left=NULL;
-    n->right=NULL;
+    struct node *newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=val;
+    newnode->left=NULL;
+    newnode->right=NULL;
 };
 
-struct node *inOrderpre(struct node *root)
+struct node *inorderpre(struct node *root)
 {
     root=root->left;
     while(root->right!=NULL)
@@ -42,19 +41,17 @@ struct node *deleteNode(struct node *root,int val)
     {
         root->left=deleteNode(root->left,val);
     }
-    else if(val>root->data)
-    {
+    else if(val>root->data){
         root->right=deleteNode(root->right,val);
     }
-
-    else{
-        ipre=inOrderpre(root);
+    else
+    {
+        ipre=inorderpre(root);
         root->data=ipre->data;
         root->left=deleteNode(root->left,ipre->data);
     }
     return root;
 };
-
 void inorder(struct node *root)
 {
     if(root!=NULL)
@@ -64,24 +61,6 @@ void inorder(struct node *root)
         inorder(root->right);
     }
 }
-
-struct node *insert(struct node *root,int val)
-{
-    if(root==NULL)
-    {
-        return createnode(val);
-    }
-    if(val<root->data)
-    {
-        root->left=insert(root->left,val);
-    }
-    else if(val>root->data)
-    {
-        root->right=insert(root->right,val);
-    }
-    return root;
-};
-
 int main()
 {
     struct node *p=createnode(5);
@@ -89,17 +68,15 @@ int main()
     struct node *p2=createnode(6);
     struct node *p3=createnode(1);
     struct node *p4=createnode(4);
+    struct node *q;
     p->left=p1;
     p->right=p2;
     p1->left=p3;
     p1->right=p4;
     inorder(p);
     printf("\n");
+
     deleteNode(p,3);
-    insert(p,11);
-    insert(p,7);
-    insert(p,54);
     inorder(p);
     return 0;
-
 }
